@@ -1,14 +1,12 @@
 import axios from 'axios';
-import {
-
-} from './definitions';
+import { Student } from './definitions';
 import { formatCurrency } from './utils';
 
 const API_URL = 'http://localhost:8080/api';
 
 export const getStudents = async () => {
   try {
-    const response = await axios.get(API_URL + '/students');
+    const response = await axios.get(API_URL + '/students/getAll');
     return response.data;
   } catch (error) {
     console.error('Error fetching students', error);
@@ -27,7 +25,7 @@ export const getStudentsCount = async () => {
 
 export const getGrades = async () => {
   try {
-    const response = await axios.get(API_URL + '/grades');
+    const response = await axios.get(API_URL + '/grades/getAll');
     return response.data;
   } catch (error) {
     console.error('Error fetching grades', error);
