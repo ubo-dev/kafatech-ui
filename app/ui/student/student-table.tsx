@@ -1,6 +1,7 @@
 import { Student } from '@/app/lib/definitions';
 import { Update, Delete } from '../shared/buttons';
 import { getStudents } from '@/app/lib/data';
+import StudentList from './student-list';
 
 export default async function StudentTable({
   query,
@@ -9,14 +10,15 @@ export default async function StudentTable({
   query: string;
   currentPage: number;
 }) {
+  
   const students = await getStudents();
-
+  console.log(students);
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
-            {students?.map((student: Student) => (
+            {/*students?.map((student: Student) => (
               <div
                 key={student.id}
                 className="mb-2 w-full rounded-md bg-white p-4"
@@ -41,7 +43,7 @@ export default async function StudentTable({
                   </div>
                 </div>
               </div>
-            ))}
+            ))*/} 
           </div>
           <table className="hidden min-w-full text-gray-900 md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
@@ -55,33 +57,17 @@ export default async function StudentTable({
                 <th scope="col" className="px-3 py-5 font-medium">
                   Department ID
                 </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Department Name
+                </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white">
-              {students?.map((student: Student) => (
-                <tr
-                  key={student.id}
-                  className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
-                >
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {student.firstName}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {student.firstName}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {student.departmentId}
-                  </td>
-                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex justify-end gap-3">
-                      <Update id={student.id} />
-                      <Delete id={student.id} />
-                    </div>
-                  </td>
-                </tr>
+              {students?.data.map((student: Student) => (
+                StudentList(student)
               ))}
             </tbody>
           </table>

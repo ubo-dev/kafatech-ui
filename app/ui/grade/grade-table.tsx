@@ -1,6 +1,7 @@
 import { Grade, Student } from '@/app/lib/definitions';
 import { Update, Delete } from '../shared/buttons';
 import { getGrades, getStudents } from '@/app/lib/data';
+import GradeList from './grade-list';
 
 export default async function GradeTable({
   query,
@@ -16,7 +17,7 @@ export default async function GradeTable({
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
           <div className="md:hidden">
-            {grades?.map((grade: Grade) => (
+            {/*grades.map((grade: Grade) => (
               <div
                 key={grade.id}
                 className="mb-2 w-full rounded-md bg-white p-4"
@@ -44,7 +45,7 @@ export default async function GradeTable({
                   </div>
                 </div>
               </div>
-            ))}
+            ))*/}
           </div>
           <table className="hidden min-w-full text-gray-900 md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
@@ -56,10 +57,13 @@ export default async function GradeTable({
                   Letter Grade
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Student ID
+                  Student Name
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Lecture ID
+                  Lecture Name
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Department
                 </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
@@ -67,30 +71,8 @@ export default async function GradeTable({
               </tr>
             </thead>
             <tbody className="bg-white">
-              {grades?.map((grade: Grade) => (
-                <tr
-                  key={grade.id}
-                  className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
-                >
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {grade.grade}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {grade.letterGrade}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {grade.studentId}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-3">
-                    {grade.lectureId}
-                  </td>
-                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex justify-end gap-3">
-                      <Update id={grade.id} />
-                      <Delete id={grade.id} />
-                    </div>
-                  </td>
-                </tr>
+              {grades?.data.map((grade: Grade) => (
+                GradeList(grade)
               ))}
             </tbody>
           </table>

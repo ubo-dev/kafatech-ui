@@ -11,7 +11,10 @@ export default async function Page() {
   const grades = await getGrades();
   const {
     studentsCount,
-    departmentsCount
+    departmentsCount,
+    instructorsCount,
+    lecturesCount,
+    gradesCount,
   } = await fetchCardData();
  
   return (
@@ -30,9 +33,21 @@ export default async function Page() {
           value={departmentsCount}
           type="customers"
         />
-      </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        <GradeList grades={grades} />
+        <Card
+          title="Total Lectures"
+          value={lecturesCount}
+          type="customers"
+        />
+        <Card
+          title="Total Instructor"
+          value={instructorsCount}
+          type="customers"
+        />
+        <Card
+          title="Total Grades"
+          value={gradesCount}
+          type="customers"
+        />
       </div>
     </main>
   );
